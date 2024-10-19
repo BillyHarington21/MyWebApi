@@ -2,6 +2,7 @@
 using Domen.Entities;
 using Microsoft.EntityFrameworkCore;
 using Services.DTO;
+using Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Services.RealisatioInterface
 {
-    public class ProductCategoryService
+    public class ProductCategoryService : IProductCategoryService
     {
         private readonly AppDbContext _context;
 
@@ -21,7 +22,7 @@ namespace Services.RealisatioInterface
 
         public async Task<IEnumerable<ProductCategory>> GetAllCategoriesAsync()
         {
-            return await _context.ProductCategories.Include(p => p).ToListAsync();
+            return await _context.ProductCategories.ToListAsync();
         }
 
         public async Task<ProductCategory> GetCategoryByIdAsync(int id)
